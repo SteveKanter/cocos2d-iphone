@@ -13523,10 +13523,16 @@
 				DOXYGEN_PATH = /Applications/Doxygen.app/Contents/Resources/doxygen;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"CD_DEBUG=1",
+					DEBUG,
+					"COCOS2D_DEBUG=1",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = cocos2d;
 				SKIP_INSTALL = YES;
@@ -14282,6 +14288,12 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"CD_DEBUG=1",
+					DEBUG,
+					"COCOS2D_DEBUG=1",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = FontLabel;
 				SKIP_INSTALL = YES;
 			};
