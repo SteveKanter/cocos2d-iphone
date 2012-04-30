@@ -28,13 +28,7 @@
 #import "ccMacros.h"
 #import "CCParticleSystemQuad.h"
 
-// build each architecture with the optimal particle system
-
-// ARMv7, Mac or Simulator use "Quad" particle
-
-	#define ARCH_OPTIMAL_PARTICLE_SYSTEM CCParticleSystemQuad
-
-
+#define ARCH_OPTIMAL_PARTICLE_SYSTEM CCParticleSystemQuad
 
 //! A fire particle system
 @interface CCParticleFire: ARCH_OPTIMAL_PARTICLE_SYSTEM
