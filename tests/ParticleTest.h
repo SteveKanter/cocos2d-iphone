@@ -200,3 +200,9 @@
 	CCParticleBatchNode *batchNode_;
 }
 @end
+
+@interface PremultipliedAlphaTest : ParticleDemo
+@end
+
+@interface PremultipliedAlphaTest2 : ParticleDemo
+@end

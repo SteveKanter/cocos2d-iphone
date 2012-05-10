@@ -66,7 +66,9 @@ static NSString *transitions[] = {
 	@"MultipleParticleSystemsBatched",	
 	@"AddAndDeleteParticleSystems",
 	@"ReorderParticleSystems",
-	
+
+	@"PremultipliedAlphaTest",
+	@"PremultipliedAlphaTest2",
 };
 
 Class nextAction(void);
@@ -2092,6 +2094,75 @@ Class restartAction()
 -(NSString*) subtitle
 {
 	return @"changes every 2 seconds";
+}
+@end
+
+#pragma mark -
+
+@implementation PremultipliedAlphaTest
+
+-(NSString *) title
+{
+	return @"premultiplied alpha";
+}
+
+-(NSString*) subtitle
+{
+	return @"no black halo, particles should fade out";
+}
+
+- (void)onEnter
+{
+	[super onEnter];
+
+	[self setColor:ccBLUE];
+	[self removeChild:background cleanup:YES];
+	background = nil;
+
+	self.emitter = [CCParticleSystemQuad particleWithFile:@"Particles/BoilingFoam.plist"];
+
+	// Particle Designer "normal" blend func causes black halo on premul textures (ignores multiplication)
+	//self.emitter.blendFunc = (ccBlendFunc){ GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };
+
+	// Cocos2d "normal" blend func for premul causes alpha to be ignored (oversaturates colors)
+	self.emitter.blendFunc = (ccBlendFunc) { GL_ONE, GL_ONE_MINUS_SRC_ALPHA };
+
+	NSAssert([self.emitter doesOpacityModifyRGB], @"Particle texture does not have premultiplied alpha, test is useless");
+
+	// Toggle next line to see old behavior
+//	self.emitter.opacityModifyRGB = NO;
+
+	self.emitter.startColor = ccc4f(1, 1, 1, 1);
+	self.emitter.endColor   = ccc4f(1, 1, 1, 0);
+	self.emitter.startColorVar = self.emitter.endColorVar = ccc4f(0, 0, 0, 0);
+
+	[self addChild:emitter_ z:10];
+}
+
+@end
+
+#pragma mark -
+
+@implementation PremultipliedAlphaTest2
+-(void) onEnter
+{
+	[super onEnter];
+	
+	[self setColor:ccBLACK];
+	[self removeChild:background cleanup:YES];
+	background = nil;
+	
+	self.emitter = [CCParticleSystemQuad particleWithFile:@"Particles/TestPremultipliedAlpha.plist"];
+	[self addChild:emitter_ z:10];
+}
+
+-(NSString *) title
+{
+	return @"premultiplied alpha 2";
+}
+-(NSString*) subtitle
+{
+	return @"Arrows should be faded";
 }
 @end
 
