@@ -28,18 +28,8 @@
 #import "ccMacros.h"
 #import "CCParticleSystemQuad.h"
 
-// build each architecture with the optimal particle system
+#define ARCH_OPTIMAL_PARTICLE_SYSTEM CCParticleSystemQuad
 
-// ARMv7, Mac or Simulator use "Quad" particle
-#if defined(__ARM_NEON__) || defined(__CC_PLATFORM_MAC) || TARGET_IPHONE_SIMULATOR
-	#define ARCH_OPTIMAL_PARTICLE_SYSTEM CCParticleSystemQuad
-
-// ARMv6 use "Point" particle
-#elif __arm__
-	#define ARCH_OPTIMAL_PARTICLE_SYSTEM CCParticleSystemPoint
-#else
-	#error(unknown architecture)
-#endif
 
 
 //! A fire particle system
