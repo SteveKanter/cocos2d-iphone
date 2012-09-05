@@ -211,7 +211,7 @@
 {
 	NSAssert(spriteFrame!=nil, @"Invalid spriteFrame for sprite");
 
-	id ret = [self initWithTexture:spriteFrame.texture rect:spriteFrame.rect];
+	id ret = [self initWithTexture:spriteFrame.texture rect:spriteFrame.rect rotated:spriteFrame.rotated];
 	[self setDisplayFrame:spriteFrame];
 	return ret;
 }
